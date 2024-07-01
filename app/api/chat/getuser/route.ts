@@ -11,7 +11,7 @@ export const GET = async()=>{
         if(!authUser) return;
         // connect the database
         await connectDatabase();
-        const users : UserDocument[] = await User.find({_id:{$ne:authUser?.user?._id}});
+        const users : UserDocument[] = await User.find({_id:{$ne:authUser?.user?.id}});
         return NextResponse.json(users);
     } catch (error) {
         console.log("Error while getting the user for sending the image snap");
