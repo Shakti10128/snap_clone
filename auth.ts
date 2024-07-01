@@ -13,24 +13,23 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   secret:process.env.NEXTAUTH_SECRET,
 
   callbacks : {
-    async session({session}:{session:any}){
+    async session({session}:{session:any}) {
         try {
             await connectDatabase();
-            if(session?.user) {
-                const user = await User.findOne({email:session?.user?.email});
-                if(user) {
+            if (session.user) {
+                const user = await User.findOne({ email: session.user.email });
+                if (user) {
                     session.user._id = user._id;
+                    session._id = user._id;
                     return session;
+                } else {
+                    console.log("User not found.");
                 }
-                else{
-                    console.log("user not found");
-                }
-            }
-            else{
+            } else {
                 console.log("Invalid session");
             }
         } catch (error) {
-            console.log(error);
+            console.log(error); 
             throw error;
         }
     },
