@@ -10,7 +10,7 @@
     }
     else{
         try {
-            const res = await mongoose.connect("mongodb+srv://aashutejaan10128:ryboOW0Jnhd6QqBA@cluster0.lxwldlc.mongodb.net/")
+            const res = await mongoose.connect(process.env.MONGO_URI!);
             isDatabaseConnected = res.connection
             return isDatabaseConnected;
         } catch (error) {

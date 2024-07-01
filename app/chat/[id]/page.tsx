@@ -9,7 +9,9 @@ import React from 'react'
 const ChattingPage = async ({params}:{params:{id:string}}) => {
   let userProfile:any = await getUserProfile(params.id);
   const authUser = await auth();
-  const message = authUser ? await getMessage(authUser?.user?._id,params.id) : [];
+  const _id:string = authUser?.user?._id
+  console.log(_id)
+  const message = authUser ? await getMessage(_id,params.id) : [];
   return (
     <div className='w-[72%]'>
         <ChatPage userProfile={userProfile} message={message} authUser={authUser}/>
